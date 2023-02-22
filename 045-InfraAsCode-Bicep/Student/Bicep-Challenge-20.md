@@ -22,9 +22,9 @@ Remember when we covered modules back in Challenge 6?  We created our own module
 
 So your challenge is to:
 - Update your bicep file to leverage the "AKS Run Command Script" to run the following command, which will deploy a sample application to the cluster:
+
 ```
 kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml
-
 ```
 
 ## Success Criteria
