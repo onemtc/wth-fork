@@ -1,11 +1,10 @@
 # Challenge 20 - Deploy an AKS Kubernetes Cluster
 
-[< Previous Challenge](./Bicep-Challenge-11.md) - [Home](../README.md)
+[< Previous Challenge](./Bicep-Challenge-11.md) - [Home](../README.md) - [Next Challenge>](./Bicep-Challenge-21.md)
 
 ## Introduction
 
 The goals of this challenge include understanding:
-- How to deploy resources to different scopes (management groups , subscriptions and resource groups)
 - How to deploy an AKS cluster using Bicep
 - How to leverage modules & deployment scripts to deploy code to the cluster
 
