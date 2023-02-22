@@ -16,7 +16,7 @@ Specifications:
 
 - Deploy a linux web app with `linuxFxVersion` set to `NODE|14-LTS`
 - The application can be found at the url `https://github.com/Azure-Samples/nodejs-docs-hello-world`
-    - _hint: use this with the `repoUrl` parameter
+    - _hint: use this with the `repoUrl` parameter_
 
 ## Success Criteria
 
