@@ -21,7 +21,7 @@ Now that your cluster is running, we want to deploy a sample app to the cluster.
 Remember when we covered modules back in Challenge 6?  We created our own modules.  But there are also _public modules_ you can use. For this challenge, we're going to use a module called `AKS Run Command Script`, which allows you to run a command on a Kubernetes cluster by calling a deployment script under the covers.  You can find the module & how to use it here:  https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/aks-run-command/README.md
 
 So your challenge is to:
-- Update your bicep file to leverage the "AKS Run Command Script" to run the following commands:
+- Update your bicep file to leverage the "AKS Run Command Script" to run the following command, which will deploy a sample application to the cluster:
 ```
 kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml
 
@@ -35,5 +35,5 @@ kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/azure-voting-ap
 ## Learning Resources
 
 - [Quickstart: Deploy an Azure Kubernetes Service (AKS) cluster using Bicep](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-bicep)
-- [AKS Run Command Script](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template)
+- [AKS Run Command Script](https://github.com/Azure/bicep-registry-modules/blob/main/modules/deployment-scripts/aks-run-command/README.md)
 - [Using Bicep modules](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
