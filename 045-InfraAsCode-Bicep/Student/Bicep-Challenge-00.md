@@ -23,7 +23,9 @@ In this challenge, we'll be setting up all the tools we will need to complete ou
   - [Visual Studio Code](https://code.visualstudio.com/)
   - Bicep plugin for VS Code
     - [Bicep VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep)
-  - [Bicep CLI](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install) - AzureCLI version 2.20 & higher should include the Bicep CLI tools.  If you are using PowerShell, you must follow the instructions at this link to install the Bicep CLI.
+  - [Bicep CLI](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install)
+
+    AzureCLI version 2.20 and higher should include the Bicep CLI tools. If you are using PowerShell, you must follow the instructions at this link to install the Bicep CLI.
 
 **NOTE:** You can complete all of the challenges with the Azure Cloud Shell! However, be a good cloud architect and make sure you have experience installing the tools locally.
 
