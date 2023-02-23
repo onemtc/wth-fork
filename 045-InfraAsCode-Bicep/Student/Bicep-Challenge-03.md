@@ -8,7 +8,6 @@ The goals for this challenge include understanding:
 
 - How to reference to an existing resource
 - Creating a set of resources based on a list or count (loops)
-- Conditionally deploying a resource
 
 ## Description
 
