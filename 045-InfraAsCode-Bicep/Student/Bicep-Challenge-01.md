@@ -16,7 +16,7 @@ The goals for this challenge include understanding:
 
 ARM templates are very powerful and provide a lot of functionality. However, many customers have commented that they are hard to learn and can be difficult to work with, especially because they are written in JSON with additional functionality embedded through template functions.
 
-Bicep is a new language for ARM templates. Unlike JSON, it's not a general-purpose file format; it's designed specifically for deploying resources into Azure. Its goal is to be a much cleaner, more readable language.
+Bicep is the newest language for authoring infrasructure-as-code templates for Azure. Unlike JSON, it's not a general-purpose file format; it's designed specifically for deploying resources into Azure. Its goal is to be a clean, readable language.
 
 Bicep templates are transpiled into standard JSON ARM templates in a similar way to how TypeScript is transpiled into JavaScript. This conversion is currently achieved using the Bicep CLI, although in future the transpilation step may be embedded into the Azure CLI and other tooling as well.
 
