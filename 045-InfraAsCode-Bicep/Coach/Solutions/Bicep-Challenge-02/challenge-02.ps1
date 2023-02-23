@@ -9,5 +9,5 @@ New-AzResourceGroupDeployment `
 	-Name $deploymentName `
 	-ResourceGroupName $resourceGroupName `
 	-TemplateFile ./challenge-02.bicep `
-	-containerName 'container1' `
-	-globalRedundancy $true
+	-TemplateParameterFile ./challenge-02.parameters.json
+
