@@ -125,7 +125,7 @@ Keyvault creation script (Bash):
 
 ```bash
 RG="<your rg>" 
-LOCATION="<your region"
+LOCATION="<your region>"
 DEPLOYMENT="ch4deployment"
 
 az group create --name $RG --location $LOCATIONaz deployment group create --resource-group $RG --template-file akv.bicep
