@@ -12,4 +12,5 @@ az deployment group create \
 	--name $DEPLOYMENT_NAME \
     --resource-group $RESOURCE_GROUP_NAME \
     --template-file ./challenge-02.bicep \
-    --parameters challenge-02.parameters.json
+    --parameters ./challenge-02.parameters.json
+

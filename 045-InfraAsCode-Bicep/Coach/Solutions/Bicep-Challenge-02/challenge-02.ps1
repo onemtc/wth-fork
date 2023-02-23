@@ -17,3 +17,4 @@ New-AzResourceGroupDeployment `
 	-containerName 'container1' `
 	-globalRedundancy $true `
 	-TemplateParameterFile ./challenge-02.parameters.json
+
