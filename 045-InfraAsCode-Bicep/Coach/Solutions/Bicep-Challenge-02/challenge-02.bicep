@@ -1,3 +1,8 @@
+/* 
+The base parameters file is included in the coach's solution.  It can be created directly, 
+or in VSC hitting Shirt-Ctrl-P and searching for "BICEP: Generate Parameters File" will
+create the file based on your BICEP template.
+*/
 param containerName string
 param globalRedundancy bool = false
 
