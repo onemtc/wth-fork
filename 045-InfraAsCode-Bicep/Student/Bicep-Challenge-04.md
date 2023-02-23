@@ -4,29 +4,129 @@
 
 ## Introduction
 
-The goals for this challenge are to understand:
-- Handling secret values
-- Not getting fired!
+The goals for this challenge are to understand how to handle secret values, eg **Don't encode secrets in your code!**
 
-So far, the only parameters you have passed into your template have been related to the Virtual Network. In the next challenge you will deploy a VM which will require you to pass in a password for the VM's admin account.  It is an **ANTI-pattern** to put a secret value such as a password in plain text in a parameter file! NEVER do this!
 
-#### **Seriously, this is something that could cost you your job!**
+So far, the only parameters you have passed into your template have been related to storage accounts. In the next challenge you will deploy a VM which will require you to pass in a password for the VM's admin account.  It is an **ANTI-pattern** to put a secret value such as a password in plain text in a parameter file! NEVER do this!
 
 It is a BEST practice to store secret values (such as passwords) in the Azure Key Vault service. We have provided you with a script that can create a Key Vault for you, and prompt you to enter the secret value (password) you want to store in the vault.
 
 ## Description
 
-Your challenge, should you accept it, is to:
-+ Create an Azure Key Vault and store a secret value in it by running one of the provided KeyVault scripts of your choice. You can find the scripts in the Resources folder for **Bicep-Challenge-04**:
-    - create-key-vault-CLI.sh - Azure CLI
-    - create-key-vault-PS.ps1 - PowerShell
-+ Retrieve the secret value from Azure Key Vault and pass it into your template as a parameter without having the value exposed as plain text at any point in time!
-
+Your challenges are:
++ Create an Azure Key Vault and store a secret value in it by running the provided Bicep template (See below).  
++ Next, check that the key vault has been created in the Azure portal. To view the secret in the portal, you'll need to add your userid to the keyvault access policies.
++ Next, create an new Bicep template and parameters file so that it reads the secret from Azure Key Vault and outputs the secret value as a template output.  _(Yes this is a anti-pattern! We are just doing it as a learning exercise)_
 
 ## Success Criteria
 
-1. Verify the value of the parameter in the portal after deployment
+1. Verify the value of the parameter output from your Bicep template
 
-## Advanced Challenge (Optional)
+## Resources
 
-The goal of this challenge was focused on how to _retrieve_ secret values from Key Vault for use in an ARM Template with Bicep. You can create an Azure Key Vault using an ARM Template too.  Feel free to try this as a bonus challenge.
+Keyvault Bicep file:
+
+```bicep
+var keyVaultName = 'kvwth${uniqueString(resourceGroup().id)}'
+
+@description('Specifies the Azure location where the key vault should be created.')
+param location string = resourceGroup().location
+
+@description('Specifies whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.')
+param enabledForDeployment bool = true
+
+@description('Specifies whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.')
+param enabledForDiskEncryption bool = false
+
+@description('Specifies whether Azure Resource Manager is permitted to retrieve secrets from the key vault.')
+param enabledForTemplateDeployment bool = false
+
+@description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
+param tenantId string = subscription().tenantId
+
+// @description('Specifies the object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets.')
+// param objectId string
+
+@description('Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge.')
+param keysPermissions array = [
+  'list'
+]
+
+@description('Specifies the permissions to secrets in the vault. Valid values are: all, get, list, set, delete, backup, restore, recover, and purge.')
+param secretsPermissions array = [
+  'list'
+]
+
+@description('Specifies whether the key vault is a standard vault or a premium vault.')
+@allowed([
+  'standard'
+  'premium'
+])
+param skuName string = 'standard'
+
+@description('Specifies the name of the secret that you want to create.')
+param secretName string = 'adminPassword'
+
+@description('Specifies the value of the secret that you want to create.')
+@secure()
+param secretValue string
+
+resource kv 'Microsoft.KeyVault/vaults@2022-07-01' = {
+  name: keyVaultName
+  location: location
+  properties: {
+    enabledForDeployment: enabledForDeployment
+    enabledForDiskEncryption: enabledForDiskEncryption
+    enabledForTemplateDeployment: enabledForTemplateDeployment
+    tenantId: tenantId
+    accessPolicies: []
+    // accessPolicies: [
+    //   {
+    //     objectId: objectId
+    //     tenantId: tenantId
+    //     permissions: {
+    //       keys: keysPermissions
+    //       secrets: secretsPermissions
+    //     }
+    //   }
+    // ]
+    sku: {
+      name: skuName
+      family: 'A'
+    }
+    networkAcls: {
+      defaultAction: 'Allow'
+      bypass: 'AzureServices'
+    }
+  }
+}
+
+resource secret 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  parent: kv
+  name: secretName
+  properties: {
+    value: secretValue
+  }
+}
+```
+
+Keyvault creation script (Powershell):
+
+```pwsh
+$RG="<your rg>" 
+$LOCATION="<your region>"
+$DEPLOYMENT="ch4deployment"
+
+az group create --name $RG --location $LOCATION
+az deployment group create --resource-group $RG --template-file akv.bicep
+```
+
+Keyvault creation script (Bash):
+
+```bash
+RG="<your rg>" 
+LOCATION="<your region>"
+DEPLOYMENT="ch4deployment"
+
+az group create --name $RG --location $LOCATIONaz deployment group create --resource-group $RG --template-file akv.bicep
+```
