@@ -2,7 +2,6 @@
 # For example, resourceGroupName = "<my initials>-challenge-01-rg"
 #
 # From PSH terminal in the directory for these files, run ".\challenge-01.ps1"
-#
 
 $location = 'eastus'
 $storageAccountName = '<me>ch01'

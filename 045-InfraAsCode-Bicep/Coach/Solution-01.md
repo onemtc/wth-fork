@@ -12,4 +12,4 @@ If you are self-hosting, recommend to prefix your resources with your initials t
 
 Learn how to "fish" for Bicep:
 - [Basic Bicep](https://github.com/Azure/bicep)
-- [Deploy Bicep file](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-vscode)
+- [Deploy Bicep file](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-vscode) - see options in left-hand menu
