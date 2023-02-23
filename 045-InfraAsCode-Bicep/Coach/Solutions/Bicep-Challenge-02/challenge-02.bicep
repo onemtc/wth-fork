@@ -4,16 +4,17 @@ or in VSC hitting Shirt-Ctrl-P and searching for "BICEP: Generate Parameters Fil
 create the file based on your BICEP template.
 */
 param containerName string
-param globalRedundancy bool = false
+param geoRedundancy bool = false
+param location string = resourceGroup().location
 
 var storageAccountName = 'bicepwth${uniqueString(resourceGroup().id)}'
 
 resource storage 'Microsoft.Storage/storageAccounts@2019-06-01' = {
-  location: resourceGroup().location
+  location: location
   name: storageAccountName
   kind: 'StorageV2'
   sku: {
-    name: globalRedundancy ? 'Standard_GRS' : 'Standard_LRS'
+    name: geoRedundancy ? 'Standard_GRS' : 'Standard_LRS'
   }
   properties: {
     accessTier: 'Hot'
