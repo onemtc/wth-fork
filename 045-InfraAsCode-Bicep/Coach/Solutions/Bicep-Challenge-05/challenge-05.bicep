@@ -12,12 +12,10 @@ param location string = resourceGroup().location
 
 //The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.10.
 @allowed([
-  '12.04.5-LTS'
-  '14.04.2-LTS'
-  '15.10'
-  '16.04-LTS'
+  '16.04.0-LTS'
+  '18.04-LTS'
 ])
-param ubuntuOSVersion string = '16.04-LTS'
+param ubuntuOSVersion string = '18.04-LTS'
 
 // VNet Address Prefix
 param vnetPrefix string = '10.0.0.0/16'
