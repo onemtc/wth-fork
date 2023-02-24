@@ -4,9 +4,9 @@
 
 ## Notes & Guidance
 
-Challenge 6 notes coming soon...
+In this challenge, the student is learning about modules.  A VM and VNET are separated into modules to show how to break up monoliths and promote reuse.
 
 ## Tips
 
+- [Bicep Modules](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
 - Validate your Bicep files regularly by executing `bicep build mybicepfile.bicep`.
-- Remember Bicep is still in preview so there may be bugs or missing features.

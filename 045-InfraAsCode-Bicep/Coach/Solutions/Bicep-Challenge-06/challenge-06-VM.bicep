@@ -10,12 +10,10 @@ param resourcePrefix string = 'bicepwth'
 
 //The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.10.
 @allowed([
-  '12.04.5-LTS'
-  '14.04.2-LTS'
-  '15.10'
-  '16.04-LTS'
+  '18.04-LTS'
+  '20.04-LTS'
 ])
-param ubuntuOSVersion string = '16.04-LTS'
+param ubuntuOSVersion string = '20.04-LTS'
 
 // Subnet Name
 param subnetName string = 'Default'
@@ -31,14 +29,13 @@ var vmSize = 'Standard_DS2_v2'
 var imagePublisher = 'Canonical'
 var imageOffer = 'UbuntuServer'
 
-
 //Start of resource section for creating VM
 
-resource vnetName 'Microsoft.Network/virtualNetworks@2015-06-15' existing = {
+resource vnetName 'Microsoft.Network/virtualNetworks@2022-07-01' existing = {
   name: vnetName_var
 }
 
-resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2015-05-01-preview' = {
+resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
   name: publicIPAddressName_var
   location: resourceGroup().location
   properties: {
@@ -49,7 +46,7 @@ resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2015-05-01-pre
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2015-05-01-preview' = {
+resource nicName 'Microsoft.Network/networkInterfaces@2022-07-01' = {
   name: nicName_var
   location: resourceGroup().location
   properties: {
@@ -70,7 +67,7 @@ resource nicName 'Microsoft.Network/networkInterfaces@2015-05-01-preview' = {
   }
 }
 
-resource vmName 'Microsoft.Compute/virtualMachines@2017-03-30' = {
+resource vmName 'Microsoft.Compute/virtualMachines@2022-11-01' = {
   name: vmName_var
   location: resourceGroup().location
   properties: {

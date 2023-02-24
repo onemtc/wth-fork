@@ -15,7 +15,7 @@ var nsgName_var = '${resourcePrefix}-NSG'
 
 
 
-resource nsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
+resource nsgName 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   name: nsgName_var
   location: resourceGroup().location
   properties: {
@@ -52,7 +52,7 @@ resource nsgName 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
   }
 }
 
-resource vnetName 'Microsoft.Network/virtualNetworks@2015-06-15' = {
+resource vnetName 'Microsoft.Network/virtualNetworks@2022-07-01' = {
   name: vnetName_var
   location: resourceGroup().location
   properties: {
