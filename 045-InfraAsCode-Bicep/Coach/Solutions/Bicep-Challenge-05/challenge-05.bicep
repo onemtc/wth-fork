@@ -43,7 +43,7 @@ var imageOffer = 'UbuntuServer'
 
 //Start of resource section for creating VM
 
-resource thisnsg 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
+resource thisnsg 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   name: nsgName
   location: location
   properties: {
@@ -80,7 +80,7 @@ resource thisnsg 'Microsoft.Network/networkSecurityGroups@2015-06-15' = {
   }
 }
 
-resource thisvnet 'Microsoft.Network/virtualNetworks@2015-06-15' = {
+resource thisvnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
   name: vnetName
   location: location
   properties: {
@@ -103,7 +103,7 @@ resource thisvnet 'Microsoft.Network/virtualNetworks@2015-06-15' = {
   }
 }
 
-resource thisPip 'Microsoft.Network/publicIPAddresses@2015-05-01-preview' = {
+resource thisPip 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
   name: publicIPAddressName
   location: location
   properties: {
@@ -114,7 +114,7 @@ resource thisPip 'Microsoft.Network/publicIPAddresses@2015-05-01-preview' = {
   }
 }
 
-resource thisnic 'Microsoft.Network/networkInterfaces@2015-05-01-preview' = {
+resource thisnic 'Microsoft.Network/networkInterfaces@2022-07-01' = {
   name: nicName
   location: location
   properties: {
@@ -135,7 +135,7 @@ resource thisnic 'Microsoft.Network/networkInterfaces@2015-05-01-preview' = {
   }
 }
 
-resource thisvm 'Microsoft.Compute/virtualMachines@2017-03-30' = {
+resource thisvm 'Microsoft.Compute/virtualMachines@2022-11-01' = {
   name: vmName
   location: location
   properties: {
