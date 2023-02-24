@@ -8,7 +8,7 @@ param globalRedundancy bool = false
 
 var storageAccountName = 'bicepwth${uniqueString(resourceGroup().id)}'
 
-resource storage 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   location: resourceGroup().location
   name: storageAccountName
   kind: 'StorageV2'
@@ -21,7 +21,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2019-06-01' = {
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-09-01' = {
   name: '${storage.name}/default/${containerName}'
   properties: {
     publicAccess: 'Container'
