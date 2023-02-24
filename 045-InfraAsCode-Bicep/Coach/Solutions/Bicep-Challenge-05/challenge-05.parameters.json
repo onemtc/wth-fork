@@ -8,7 +8,7 @@
     "adminPassword": {
       "reference": {
         "keyVault": {
-          "id": "/subscriptions/<YOUR SUBSCRIPTION ID>/resourceGroups/<YOUR RESOURCE GROUP>/providers/Microsoft.KeyVault/vaults/<YOUR KEYVAULT>"
+        "id": "/subscriptions/<YOUR SUBSCRIPTION ID>/resourceGroups/<YOUR RESOURCE GROUP>/providers/Microsoft.KeyVault/vaults/<YOUR KEYVAULT>"
         },
         "secretName": "adminPassword"
       }
