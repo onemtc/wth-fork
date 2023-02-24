@@ -4,8 +4,8 @@
 # From PSH terminal in the directory for these files, run ".\challenge-06.ps1"
 
 $location = 'eastus'
-$resourceGroupName = '<me>-challenge-06a-rg'
-$deploymentName = '<me>-challenge-06a-deployment'
+$resourceGroupName = '<me>-challenge-06-rg'
+$deploymentName = '<me>-challenge-06-deployment'
 
 New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
 
