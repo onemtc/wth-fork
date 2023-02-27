@@ -12,12 +12,12 @@ In this challenge, we'll be setting up all the tools we will need to complete ou
 
 - Install the recommended toolset:
   - An [Azure Subscription](https://azure.microsoft.com/free/)
-  - [Windows Subsystem for Linux (Windows only)](https://learn.microsoft.com/windows/wsl/install)
+  - _optional_ [Windows Subsystem for Linux (Windows only)](https://learn.microsoft.com/windows/wsl/install)
   - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
     - Must be at least version 2.20.x
     - **NOTE:** If installing on a Windows workstation, install into the Windows Subsystem for Linux environment using the installation instructions for Linux.
-    - **NOTE:** If you’re running into issues running Azure CLI command on Windows, disable Global Protect (VPN)
-  - [Azure CLI Bicep extension](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install#azure-cli)
+    - **NOTE:** If you’re running into issues running Azure CLI command on Windows, you may need to disable your vpn
+    - [Azure CLI Bicep extension](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install#azure-cli)
   - [PowerShell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell)
   - [PowerShell Cmdlets for Azure](https://learn.microsoft.com/powershell/azure/install-az-ps)
   - [Visual Studio Code](https://code.visualstudio.com/)
@@ -27,10 +27,9 @@ In this challenge, we'll be setting up all the tools we will need to complete ou
 
     AzureCLI version 2.20 and higher should include the Bicep CLI tools. If you are using PowerShell, you must follow the instructions at this link to install the Bicep CLI.
 
-**NOTE:** You can complete all of the challenges with the Azure Cloud Shell! However, be a good cloud architect and make sure you have experience installing the tools locally.
+**NOTE:** You can complete all of the challenges with the Azure Cloud Shell! However, be a good cloud architect and make sure you have experience installing the tools locally.  Also, it's your choice whether to use the Azure CLI or the Azure Powershell Cmdlets.
 
 ## Success Criteria
 
-1. You have a bash shell at your disposal (WSL, Mac, Linux, or Azure Cloud Shell)
 1. Running `az --version` shows the version of your Azure CLI
 1. Visual Studio Code and Bicep tools are installed.
