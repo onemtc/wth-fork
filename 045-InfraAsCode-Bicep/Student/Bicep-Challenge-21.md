@@ -1,6 +1,6 @@
-# Challenge 20 - Deploy an AKS Kubernetes Cluster
+# Challenge 21 - Deploy an AKS Kubernetes Cluster
 
-[< Previous Challenge](./Bicep-Challenge-11.md) - [Home](../README.md) 
+[< Previous Challenge](./Bicep-Challenge-20.md) - [Home](../README.md) 
 
 ## Introduction
 

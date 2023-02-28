@@ -1,74 +1,42 @@
-@description('The name of the Managed Cluster resource.')
-param clusterName string = 'ch20cluster'
+// comes from https://learn.microsoft.com/en-us/azure/app-service/provision-resource-bicep
 
-@description('The location of the Managed Cluster resource.')
-param location string = resourceGroup().location
+param webAppName string = uniqueString(resourceGroup().id) // Generate unique String for web app name
+param sku string = 'F1' // The SKU of App Service Plan
+param linuxFxVersion string = 'node|14-lts' // The runtime stack of web app
+param location string = resourceGroup().location // Location for all resources
+param repositoryUrl string = 'https://github.com/Azure-Samples/nodejs-docs-hello-world'
+param branch string = 'main'
+var appServicePlanName = toLower('AppServicePlan-${webAppName}')
+var webSiteName = toLower('wapp-${webAppName}')
 
-@description('Optional DNS prefix to use with hosted Kubernetes API server FQDN.')
-param dnsPrefix string
-
-@description('Disk size (in GB) to provision for each of the agent pool nodes. This value ranges from 0 to 1023. Specifying 0 will apply the default disk size for that agentVMSize.')
-@minValue(0)
-@maxValue(1023)
-param osDiskSizeGB int = 0
-
-@description('The number of nodes for the cluster.')
-@minValue(1)
-@maxValue(50)
-param agentCount int = 3
-
-@description('The size of the Virtual Machine.')
-param agentVMSize string = 'standard_d2s_v3'
-
-@description('User name for the Linux Virtual Machines.')
-param linuxAdminUsername string
-
-@description('Configure all linux machines with the SSH RSA public key string. Your key should include three parts, for example \'ssh-rsa AAAAB...snip...UcyupgH azureuser@linuxvm\'')
-param sshRSAPublicKey string
-
-
-resource aks 'Microsoft.ContainerService/managedClusters@2022-11-02-preview' = {
-  name: clusterName
-
+resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
+  name: appServicePlanName
   location: location
-  identity: {
-    type: 'SystemAssigned'
-  }
   properties: {
-    dnsPrefix: dnsPrefix
-    agentPoolProfiles: [
-      {
-        name: 'agentpool'
-        osDiskSizeGB: osDiskSizeGB
-        count: agentCount
-        vmSize: agentVMSize
-        osType: 'Linux'
-        mode: 'System'
-      }
-    ]
-    linuxProfile: {
-      adminUsername: linuxAdminUsername
-      ssh: {
-        publicKeys: [
-          {
-            keyData: sshRSAPublicKey
-          }
-        ]
-      }
+    reserved: true
+  }
+  sku: {
+    name: sku
+  }
+  kind: 'linux'
+}
+
+resource appService 'Microsoft.Web/sites@2020-06-01' = {
+  name: webSiteName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    siteConfig: {
+      linuxFxVersion: linuxFxVersion
     }
   }
 }
 
-output controlPlaneFQDN string = aks.properties.fqdn
-
-module runCmd 'br/public:deployment-scripts/aks-run-command:1.0.1' = {
-  name: 'kubectlDeploy'
-  params: {
-    aksName: clusterName
-    location: location
-    commands: [
-      'kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml'
-      'kubectl get svc -o json'
-    ]
+resource srcControls 'Microsoft.Web/sites/sourcecontrols@2021-01-01' = {
+  name: '${appService.name}/web'
+  properties: {
+    repoUrl: repositoryUrl
+    branch: branch
+    isManualIntegration: true
   }
 }
