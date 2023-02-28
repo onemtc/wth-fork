@@ -8,7 +8,7 @@ param repositoryUrl string = 'https://github.com/Azure-Samples/nodejs-docs-hello
 param branch string = 'main'
 
 // Use abbreviations documented at https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
-var appServicePlanName = toLower('asp-${webAppName}')
+var appServicePlanName = toLower('plan-${webAppName}')
 var webSiteName = toLower('app-${webAppName}')
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
