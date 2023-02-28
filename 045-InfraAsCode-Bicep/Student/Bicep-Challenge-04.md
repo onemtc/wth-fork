@@ -1,10 +1,10 @@
 # Challenge 4 - Secret Values with Azure Key Vault
 
-[< Previous Challenge](./Bicep-Challenge-03.md) - [Home](../README.md) - [Next Challenge>](./Bicep-Challenge-05.md)
+[< Previous Challenge](./Bicep-Challenge-03.md) - [Home](../README.md) - [Next Challenge >](./Bicep-Challenge-05.md)
 
 ## Introduction
 
-The goals for this challenge are to understand how to handle secret values, eg **Don't encode secrets in your code!**
+The goals for this challenge are to understand how to handle secret values, e.g., **Don't encode secrets in your code!**
 
 So far, the only parameters you have passed into your template have been related to storage accounts. In a later challenge, you will deploy resources requiring secret credentials as parameters. It is an **ANTI-pattern** to put a secret value such as a password in plain text in a parameter file! NEVER do this!
 
@@ -17,26 +17,27 @@ In this challenge, you will create an Azure Key Vault and store a secret in it. 
 ## Setup
 
 It can be tricky to deploy an Azure Key Vault. In the interest of time, we are providing a Bicep template for you to deploy.
+
 <p>
-<details><summary>Keyvault Bicep file:</summary>
+<details><summary>Key Vault Bicep file:</summary>
 <p>
 
 ```bicep
 var keyVaultName = 'kvwth${uniqueString(resourceGroup().id)}'
 
-@description('Specifies the Azure location where the key vault should be created.')
+@description('Specifies the Azure region where the Key Vault should be created.')
 param location string = resourceGroup().location
 
-@description('Specifies whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.')
+@description('Specifies whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the Key Vault.')
 param enabledForDeployment bool = true
 
-@description('Specifies whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.')
+@description('Specifies whether Azure Disk Encryption is permitted to retrieve secrets from the Vault and unwrap keys.')
 param enabledForDiskEncryption bool = false
 
-@description('Specifies whether Azure Resource Manager is permitted to retrieve secrets from the key vault.')
+@description('Specifies whether Azure Resource Manager is permitted to retrieve secrets from the Key Vault.')
 param enabledForTemplateDeployment bool = false
 
-@description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
+@description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the Key Vault. Get it by using `Get-AzSubscription` cmdlet.')
 param tenantId string = subscription().tenantId
 
 @description('Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge.')
@@ -49,7 +50,7 @@ param secretsPermissions array = [
   'list'
 ]
 
-@description('Specifies whether the key vault is a standard vault or a premium vault.')
+@description('Specifies whether the Key Vault is a Standard vault or a Premium vault.')
 @allowed([
   'standard'
   'premium'
@@ -91,6 +92,7 @@ resource secret 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
   }
 }
 ```
+
 </details>
 
 <p>
@@ -108,7 +110,7 @@ az group create --name $RG --location $LOCATION
 az deployment group create --resource-group $RG --template-file akv.bicep
 ```
 
-Keyvault creation script (Bash):
+Key Vault creation script (Bash):
 
 ```bash
 RG="<your rg>" 
@@ -117,6 +119,7 @@ DEPLOYMENT="ch4deployment"
 
 az group create --name $RG --location $LOCATIONaz deployment group create --resource-group $RG --template-file akv.bicep
 ```
+
 </details>
 
 ## Challenges
@@ -130,4 +133,3 @@ Your challenges are:
 ## Success Criteria
 
 1. Verify the value of the parameter output from your Bicep template
-
