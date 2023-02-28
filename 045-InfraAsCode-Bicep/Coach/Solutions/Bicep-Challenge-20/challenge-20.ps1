@@ -1,12 +1,12 @@
 $location = 'eastus'
-$deploymentName = 'challenge-21-deployment'
-$resourceGroupName='challenge-21-rg'
+$deploymentName = '<me>-challenge-20-deployment'
+$resourceGroupName = '<me>-challenge-20-rg'
 
-az group create --name $resourceGroupName --location $location
+New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
 
 New-AzSubscriptionDeployment `
 	-Name $deploymentName `
-	-TemplateFile ./challenge-21.bicep `
+	-TemplateFile ./challenge-20.bicep `
 	-ResourceGroupName $resourceGroupName `
 	-Location $location `
-	-TemplateParameterFile ./challenge-21.parameters.json
+	-TemplateParameterFile ./challenge-20.parameters.json
