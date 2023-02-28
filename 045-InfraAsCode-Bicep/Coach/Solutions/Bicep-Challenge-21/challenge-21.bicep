@@ -1,5 +1,5 @@
 @description('The name of the Managed Cluster resource.')
-param clusterName string = 'ch20cluster'
+param clusterName string = 'ch21cluster'
 
 @description('The location of the Managed Cluster resource.')
 param location string = resourceGroup().location
@@ -25,7 +25,6 @@ param linuxAdminUsername string
 
 @description('Configure all linux machines with the SSH RSA public key string. Your key should include three parts, for example \'ssh-rsa AAAAB...snip...UcyupgH azureuser@linuxvm\'')
 param sshRSAPublicKey string
-
 
 resource aks 'Microsoft.ContainerService/managedClusters@2022-11-02-preview' = {
   name: clusterName

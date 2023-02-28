@@ -6,8 +6,10 @@ param linuxFxVersion string = 'node|14-lts' // The runtime stack of web app
 param location string = resourceGroup().location // Location for all resources
 param repositoryUrl string = 'https://github.com/Azure-Samples/nodejs-docs-hello-world'
 param branch string = 'main'
-var appServicePlanName = toLower('AppServicePlan-${webAppName}')
-var webSiteName = toLower('wapp-${webAppName}')
+
+// Use abbreviations documented at https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
+var appServicePlanName = toLower('plan-${webAppName}')
+var webSiteName = toLower('app-${webAppName}')
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
@@ -33,7 +35,8 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 }
 
 resource srcControls 'Microsoft.Web/sites/sourcecontrols@2021-01-01' = {
-  name: '${appService.name}/web'
+  name: 'web'
+  parent: appService
   properties: {
     repoUrl: repositoryUrl
     branch: branch
