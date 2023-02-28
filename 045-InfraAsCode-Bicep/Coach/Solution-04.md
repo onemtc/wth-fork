@@ -8,4 +8,4 @@ In this challenge, we're showing the proper use of Azure Key Vault to protect se
 
 ## Learning Resources
 
-- [Use Azure Key Vault to pass secure parameter value during Bicep deployment](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/key-vault-parameter?tabs=azure-cli)
+- [Use Azure Key Vault to pass secure parameter value during Bicep deployment](https://learn.microsoft.com/azure/azure-resource-manager/bicep/key-vault-parameter?tabs=azure-cli)
