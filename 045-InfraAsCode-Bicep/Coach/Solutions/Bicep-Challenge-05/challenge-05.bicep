@@ -33,11 +33,9 @@ var vmName = '${resourcePrefix}-VM'
 var publicIPAddressName = '${resourcePrefix}-PIP'
 var publicIPAddressType = 'Dynamic'
 var dnsNameForPublicIP = '${resourcePrefix}${uniqueString(resourceGroup().id)}-pip'
-var subnetRef = '${thisvnet.id}/subnets/${subnetName}'
 var vmSize = 'Standard_DS2_v2'
 var imagePublisher = 'Canonical'
 var imageOffer = 'UbuntuServer'
-
 
 //Start of resource section for creating VM
 
@@ -125,7 +123,7 @@ resource thisnic 'Microsoft.Network/networkInterfaces@2022-07-01' = {
             id: thisPip.id
           }
           subnet: {
-            id: subnetRef
+            id: thisvnet.properties.subnets[0].id
           }
         }
       }
