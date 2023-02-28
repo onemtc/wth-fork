@@ -1,3 +1,5 @@
+param location string = resourceGroup().location
+
 //Password for the VM
 @secure()
 param adminPassword string
@@ -8,36 +10,30 @@ param adminUsername string
 //Resource Prefix for all VM Resources
 param resourcePrefix string = 'bicepwth'
 
-//The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.10.
+//The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version.
 @allowed([
   '16.04.0-LTS'
   '18.04-LTS'
 ])
 param ubuntuOSVersion string = '18.04-LTS'
 
-// Subnet Name
-param subnetName string = 'Default'
+// Subnet 
+param subnetId string
 
-var vnetName_var = '${resourcePrefix}-VNET'
-var nicName_var = '${resourcePrefix}-VM-NIC'
-var vmName_var = '${resourcePrefix}-VM'
-var publicIPAddressName_var = '${resourcePrefix}-PIP'
+var nicName = '${resourcePrefix}-VM-NIC'
+var vmName = '${resourcePrefix}-VM'
+var publicIPAddressName = '${resourcePrefix}-PIP'
 var publicIPAddressType = 'Dynamic'
 var dnsNameForPublicIP = '${resourcePrefix}${uniqueString(resourceGroup().id)}-pip'
-var subnetRef = '${vnetName.id}/subnets/${subnetName}'
 var vmSize = 'Standard_DS2_v2'
 var imagePublisher = 'Canonical'
 var imageOffer = 'UbuntuServer'
 
 //Start of resource section for creating VM
 
-resource vnetName 'Microsoft.Network/virtualNetworks@2022-07-01' existing = {
-  name: vnetName_var
-}
-
-resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
-  name: publicIPAddressName_var
-  location: resourceGroup().location
+resource publicIPAddress 'Microsoft.Network/publicIPAddresses@2022-07-01' = {
+  name: publicIPAddressName
+  location: location
   properties: {
     publicIPAllocationMethod: publicIPAddressType
     dnsSettings: {
@@ -46,9 +42,9 @@ resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2022-07-01' = 
   }
 }
 
-resource nicName 'Microsoft.Network/networkInterfaces@2022-07-01' = {
-  name: nicName_var
-  location: resourceGroup().location
+resource nic 'Microsoft.Network/networkInterfaces@2022-07-01' = {
+  name: nicName
+  location: location
   properties: {
     ipConfigurations: [
       {
@@ -56,10 +52,10 @@ resource nicName 'Microsoft.Network/networkInterfaces@2022-07-01' = {
         properties: {
           privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
-            id: publicIPAddressName.id
+            id: publicIPAddress.id
           }
           subnet: {
-            id: subnetRef
+            id: subnetId
           }
         }
       }
@@ -67,15 +63,15 @@ resource nicName 'Microsoft.Network/networkInterfaces@2022-07-01' = {
   }
 }
 
-resource vmName 'Microsoft.Compute/virtualMachines@2022-11-01' = {
-  name: vmName_var
-  location: resourceGroup().location
+resource vm 'Microsoft.Compute/virtualMachines@2022-11-01' = {
+  name: vmName
+  location: location
   properties: {
     hardwareProfile: {
       vmSize: vmSize
     }
     osProfile: {
-      computerName: vmName_var
+      computerName: vmName
       adminUsername: adminUsername
       adminPassword: adminPassword
     }
@@ -95,7 +91,7 @@ resource vmName 'Microsoft.Compute/virtualMachines@2022-11-01' = {
     networkProfile: {
       networkInterfaces: [
         {
-          id: nicName.id
+          id: nic.id
         }
       ]
     }
