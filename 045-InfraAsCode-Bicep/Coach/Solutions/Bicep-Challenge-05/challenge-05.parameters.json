@@ -14,7 +14,7 @@
       }
     },
     "ubuntuOSVersion": {
-      "value": "16.04-LTS"
+      "value": "18.04-LTS"
     },
     "vnetPrefix": {
       "value": "10.0.0.0/16"

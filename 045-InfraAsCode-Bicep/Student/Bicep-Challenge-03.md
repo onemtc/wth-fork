@@ -9,7 +9,7 @@ The goals for this challenge include understanding:
 - How to reference to an existing resource
 - Creating a set of resources based on a list or count (loops)
 
-## Description
+## Challenges
 
 Create a new Bicep file that add additional blob containers to an already existing storage account created in previous challenges
 

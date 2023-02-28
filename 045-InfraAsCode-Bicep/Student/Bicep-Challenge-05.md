@@ -11,10 +11,10 @@ The goals for this challenge include understanding:
    + Clean code with neat parameter and variable values
    + Figuring out what Azure resources it takes to build a VM
 
-## Description
+## Challenge
 
 +	Extend your Bicep template to deploy a virtual machine
-    +   VM requirements -
+    +   VM requirements:
         +   Linux OS
         +   Use a secure secret value for the admin password from Azure Key Vault
     + Use a resource prefix and template variables to have consistent naming of resources
@@ -26,9 +26,9 @@ The goals for this challenge include understanding:
 
 ## Tips
 
-- Yes, it's generally best practices for a Linux VM to use an SSH key.  But for this exercise, we want you to use an admin password to demostrate integrating with a Key Vault.
-- You may need to open additional ports to connect to your VM depending on which OS you deployed.
-- You will need to supply your VM with a Public IP address or use the Azure Bastion service to connect to it.
++ Yes, it's generally best practices for a Linux VM to use an SSH key.  But for this exercise, we want you to use an admin password to demonstrate integrating with a Key Vault.
++ You may need to open additional ports to connect to your VM depending on which OS you deployed.
++ You will need to supply your VM with a Public IP address or use the Azure Bastion service to connect to it.
 
 ## Learning Resources
 
