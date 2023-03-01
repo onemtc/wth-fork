@@ -1,14 +1,17 @@
-# If self-deploying the challenges, recommend adding a prefix to Azure resources.
-# For example, resourceGroupName = "<my initials>-challenge-01-rg"
+# If self-deploying the challenges, recommend adding a prefix to Azure 
+# resources. For example, resourceGroupName = "<my initials>-challenge-01-rg".
 #
-# In challenge 3, new containers are added to the storage account created in Challenge 2.
+# In challenge 3, new containers are added to the storage account created 
+# in Challenge 2.
+#
+# This file can be run using Windows Service for Linux, alternatively it
+# be run from a bash shell like Git Bash assuming it's installed or
+# run directly in VSCode from a Git Bash terminal.
 
 LOCATION='eastus'
 RESOURCE_GROUP_NAME='<me>-challenge-02-rg'
 DEPLOYMENT_NAME='<me>-challenge-03-deployment'
 STORAGE_ACCOUNT_NAME='<account name from challenge 2>'
-
-az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
 
 az deployment group create \
 	--name $DEPLOYMENT_NAME \

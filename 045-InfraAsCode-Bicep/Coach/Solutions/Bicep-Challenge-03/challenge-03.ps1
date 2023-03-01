@@ -5,13 +5,16 @@
 #
 # In challenge 3, new containers are added to the storage account created in Challenge 2.
 
-$resourceGroupName = '<me>-challenge-02-rg'
-$deploymentName = '<me>-challenge-03-deployment'
-$storageAccountName = '<storage account name from challenge 2>'
+$RESOURCE_GROUP_NAME = '<me>-challenge-02-rg'
+$DEPLOYMENT_NAME = '<me>-challenge-02-deployment'
+$STORAGE_ACCOUNT_NAME = '<storage account name from challenge 2>'
 
+# The -WhatIf is added to allow you to see the outcomes of the BICEP deployment.
+# Remove it to actually deploy the resources.
 New-AzResourceGroupDeployment `
-	-Name $deploymentName `
-	-ResourceGroupName $resourceGroupName `
+	-Name $DEPLOYMENT_NAME `
+	-ResourceGroupName $RESOURCE_GROUP_NAME `
 	-TemplateFile ./challenge-03.bicep `
-	-storageAccountName $storageAccountName `
+	-storageAccountName $STORAGE_ACCOUNT_NAME `
 	-containers 'container2', 'container3', 'container4' `
+	-WhatIf

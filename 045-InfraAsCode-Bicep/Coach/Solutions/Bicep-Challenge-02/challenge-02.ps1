@@ -3,18 +3,20 @@
 #
 # From PSH terminal in the directory for these files, run ".\challenge-01.ps1"
 
-$location = 'eastus'
-$resourceGroupName = '<me>-challenge-02-rg'
-$deploymentName = '<me>-challenge-02-deployment'
+$LOCATION = 'eastus'
+$RESOURCE_GROUP_NAME = '<me>-challenge-02-rg'
+$DEPLOYMENT_NAME = '<me>-challenge-02-deployment'
 
+New-AzResourceGroup -Name $RESOURCE_GROUP_NAME -Location $LOCATION -Force
 
-New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
-
+# The -WhatIf is added to allow you to see the outcomes of the BICEP deployment.
+# Remove it to actually deploy the resources.
 New-AzResourceGroupDeployment `
-	-Name $deploymentName `
-	-ResourceGroupName $resourceGroupName `
+	-Name $DEPLOYMENT_NAME `
+	-ResourceGroupName $RESOURCE_GROUP_NAME `
 	-TemplateFile ./challenge-02.bicep `
 	-containerName 'container1' `
-	-globalRedundancy $true `
-	-TemplateParameterFile ./challenge-02.parameters.json
+	-geoRedundancy $true `
+	-TemplateParameterFile ./challenge-02.parameters.json `
+	-WhatIf
 

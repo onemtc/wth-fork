@@ -5,7 +5,7 @@
     "containerName": {
       "value": "container1"
     },
-    "globalRedundancy": {
+    "geoRedundancy": {
       "value": false
     }
   }
