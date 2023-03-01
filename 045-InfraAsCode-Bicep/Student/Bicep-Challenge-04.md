@@ -18,9 +18,8 @@ In this challenge, you will create an Azure Key Vault and store a secret in it. 
 
 It can be tricky to deploy an Azure Key Vault. In the interest of time, we are providing a Bicep template for you to deploy.
 
-<p>
-<details><summary>Key Vault Bicep file:</summary>
-<p>
+
+Key Vault Bicep file:
 
 ```bicep
 var keyVaultName = 'kvwth${uniqueString(resourceGroup().id)}'
@@ -93,11 +92,7 @@ resource secret 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
 }
 ```
 
-</details>
-
-<p>
-<details><summary>Sample Powershell script for deployment</summary>
-<p>
+Sample Powershell script for deployment
 
 _Note: this is a sample script; feel free to modify_
 
@@ -119,8 +114,6 @@ DEPLOYMENT="ch4deployment"
 
 az group create --name $RG --location $LOCATIONaz deployment group create --resource-group $RG --template-file akv.bicep
 ```
-
-</details>
 
 ## Challenges
 
